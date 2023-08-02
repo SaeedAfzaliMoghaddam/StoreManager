@@ -12,10 +12,7 @@ namespace StoreManager.Specs.Tests.Groups.Add
     [Scenario(" ثبت گروه ")]
     public class AddGroups : BusinessIntegrationTest
     {
-        public class AddComplexes : BusinessIntegrationTest
-        {
             
-
             [Given("فهرست گروه خالی است ")]
             public void Given()
             {
@@ -56,4 +53,4 @@ namespace StoreManager.Specs.Tests.Groups.Add
 
         }
     }
-}
+

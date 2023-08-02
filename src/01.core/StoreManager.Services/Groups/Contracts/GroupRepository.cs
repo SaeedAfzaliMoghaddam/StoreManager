@@ -10,5 +10,6 @@ namespace StoreManager.Services.Groups.Contracts
     public interface GroupRepository
     {
         void Add(Group group);
+        bool NameExist(string name);
     }
 }

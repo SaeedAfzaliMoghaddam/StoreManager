@@ -2,6 +2,7 @@
 using StoreManager.Services.Contracts;
 using StoreManager.Services.Groups.Contracts;
 using StoreManager.Services.Groups.Contracts.Dto;
+using StoreManager.Services.Groups.Exceptions;
 
 namespace StoreManager.Services.Groups
 {
@@ -18,6 +19,11 @@ namespace StoreManager.Services.Groups
 
         public void Define(AddGroupsDto dto)
         {
+            var nameIsExist = _repository.NameExist(dto.Name);
+            if (nameIsExist)
+            {
+                throw new DublicateGroupNameException();
+            }
             var group = new Group
             {
                 Name = dto.Name,

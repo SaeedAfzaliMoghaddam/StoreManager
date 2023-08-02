@@ -20,5 +20,10 @@ namespace StoreManager.Persistence.EF.Groups
         {
             _groups.Add(group);
         }
+
+        public bool NameExist(string name)
+        {
+            return _groups.Any(_=>_.Name == name);
+        }
     }
 }
