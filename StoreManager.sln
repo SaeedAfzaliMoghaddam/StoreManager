@@ -29,6 +29,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StoreManager.RestApi", "src
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StoreManager.Specs.Tests", "test\StoreManager.Specs.Tests\StoreManager.Specs.Tests.csproj", "{8F647D24-6E23-44B9-82A4-AA6CB99F19D1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StoreManager.Services.Unit.Tests", "test\StoreManager.Services.Unit.Tests\StoreManager.Services.Unit.Tests.csproj", "{67B1BC75-CCCE-482D-8EF3-8A55B82BA997}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -67,6 +69,10 @@ Global
 		{8F647D24-6E23-44B9-82A4-AA6CB99F19D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8F647D24-6E23-44B9-82A4-AA6CB99F19D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8F647D24-6E23-44B9-82A4-AA6CB99F19D1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{67B1BC75-CCCE-482D-8EF3-8A55B82BA997}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{67B1BC75-CCCE-482D-8EF3-8A55B82BA997}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{67B1BC75-CCCE-482D-8EF3-8A55B82BA997}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{67B1BC75-CCCE-482D-8EF3-8A55B82BA997}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -83,6 +89,7 @@ Global
 		{C741E04F-F75B-4BE7-8DEA-349ADBBECB56} = {849082AD-E354-4B0F-B0A4-A739F0CF4EB7}
 		{7685A20D-163B-4A31-9DE0-B1A6B4276D81} = {D4409405-0B8D-4502-B24D-D8EB6BA72E9D}
 		{8F647D24-6E23-44B9-82A4-AA6CB99F19D1} = {849082AD-E354-4B0F-B0A4-A739F0CF4EB7}
+		{67B1BC75-CCCE-482D-8EF3-8A55B82BA997} = {849082AD-E354-4B0F-B0A4-A739F0CF4EB7}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0AA0B97A-94B2-4AFE-9710-4E43822A3EF2}
