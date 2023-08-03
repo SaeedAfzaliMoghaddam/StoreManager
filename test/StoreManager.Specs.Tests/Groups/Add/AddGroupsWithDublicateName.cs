@@ -13,6 +13,8 @@ using Xunit;
 using static StoreManager.Specs.Tests.BDDHelper;
 using FluentAssertions;
 using StoreManager.Services.Groups.Exceptions;
+using StoreManager.Services.Groups.Contracts;
+using StoreManager.TestTools.Factories.Groups;
 
 namespace StoreManager.Specs.Tests.Groups.Add
 {
@@ -20,29 +22,26 @@ namespace StoreManager.Specs.Tests.Groups.Add
     public class AddGroupsWithDublicateName : BusinessIntegrationTest
     {
         private Action action;
+        private GroupService _sut;
+
+        public AddGroupsWithDublicateName()
+        {
+            _sut = GroupServiceFactory.Create(SetupContext);
+        }
 
         [Given("یک گروه با نام بهداشتی" +
             " در فهرست گروه وجود دارد")]
         public void Given()
         {
-            var group = new Group
-            {
-                Name = "بهداشتی"
-            };
+            var group = GroupFactory.Generate("بهداشتی");
             DbContext.Save(group);
         }
 
         [When("یک گروه با نام بهداشتی را ثبت میکنم")]
         public void When()
         {
-            var repository = new EFGroupRepository(SetupContext);
-            var unitOfWork = new EFUnitOfWork(SetupContext);
-            var sut = new GroupAppService(repository, unitOfWork);
-            var dto = new AddGroupsDto
-            {
-                Name = "بهداشتی"
-            };
-            action = () => sut.Define(dto);
+            var dto = AddGroupsDtoFactory.Generate("بهداشتی");
+            action = () => _sut.Define(dto);
         }
 
         [Then("خطایی با عنوان 'اسم گروه تکراری'" +

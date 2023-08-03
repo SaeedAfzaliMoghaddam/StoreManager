@@ -7,23 +7,21 @@ using System.Threading.Tasks;
 
 namespace StoreManager.Migrations
 {
-    [Migration(202308011403)]
-    public class _202308011403_AddedGroupsTable : Migration
+    [Migration(202308031440)]
+    public class _202308031440_AddedProductsTable : Migration
     {
         public override void Down()
         {
-            Delete
-                .Table("Groups");
+            Delete.Table("Products");
         }
 
         public override void Up()
         {
             Create
-                .Table("Groups")
+                .Table("Products")
                 .WithColumn("Id").AsInt32().PrimaryKey().Identity()
-                .WithColumn("Name").AsString().Nullable();
-                
-
+                .WithColumn("Title").AsString(50).NotNullable()
+                .WithColumn("GroupId").AsInt32().ForeignKey("FK_Products_Groups", "Groups", "Id");
         }
     }
 }

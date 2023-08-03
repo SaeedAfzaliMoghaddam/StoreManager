@@ -21,6 +21,22 @@ namespace StoreManager.Persistence.EF.Groups
             _groups.Add(group);
         }
 
+        public void Delete(Group group)
+        {
+            _groups.Remove(group);
+        }
+
+        public Group FindById(int id)
+        {
+            var group = _groups.FirstOrDefault(_ => _.Id == id);
+            return group;
+        }
+
+        public bool IdExist(int id)
+        {
+            return _groups.Any(_ => _.Id == id);
+        }
+
         public bool NameExist(string name)
         {
             return _groups.Any(_=>_.Name == name);

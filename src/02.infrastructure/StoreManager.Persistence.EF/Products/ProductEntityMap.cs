@@ -7,27 +7,27 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace StoreManager.Persistence.EF.Groups
+namespace StoreManager.Persistence.EF.Products
 {
-    public class GroupEntityMap : IEntityTypeConfiguration<Group>
+    public class ProductEntityMap : IEntityTypeConfiguration<Product>
     {
-        public void Configure(EntityTypeBuilder<Group> entity)
+        public void Configure(EntityTypeBuilder<Product> entity)
         {
-            entity.ToTable("Groups");
+            entity.ToTable("Products");
             entity.HasKey(_=>_.Id);
             entity
                 .Property(_ => _.Id)
                 .ValueGeneratedOnAdd();
             entity
-                .Property(_ => _.Name)
+                .Property(_ => _.Title)
                 .HasMaxLength(50)
                 .IsRequired();
             entity
-                .HasMany(_ => _.Products)
-                .WithOne(_ => _.Group)
-                .HasForeignKey(_ => _.GroupId);
+                .Property(_=>_.GroupId)
+                .HasMaxLength(50)
+                .IsRequired();
 
-            
+                
         }
     }
 }

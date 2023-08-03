@@ -20,5 +20,13 @@ namespace StoreManager.RestApi.Controllers
         {
             _groupService.Define(dto);
         }
+
+        [HttpDelete]
+        [Route("Id")]
+        public void Delete([FromBody] DeleteGroupsDto dto) 
+        {
+            _groupService.Delete(dto);
+        }
+
     }
 }

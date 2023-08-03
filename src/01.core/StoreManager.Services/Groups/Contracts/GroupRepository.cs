@@ -1,9 +1,4 @@
 ﻿using StoreManager.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace StoreManager.Services.Groups.Contracts
 {
@@ -11,5 +6,10 @@ namespace StoreManager.Services.Groups.Contracts
     {
         void Add(Group group);
         bool NameExist(string name);
+        void Delete(Group group);
+        Group FindById(int id);
+        bool IdExist(int id);
+        
+        
     }
 }

@@ -5,5 +5,6 @@ namespace StoreManager.Services.Groups.Contracts
     public interface GroupService
     {
         void Define(AddGroupsDto dto);
+        void Delete(DeleteGroupsDto dto);
     }
 }

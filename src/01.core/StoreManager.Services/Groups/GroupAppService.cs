@@ -3,6 +3,7 @@ using StoreManager.Services.Contracts;
 using StoreManager.Services.Groups.Contracts;
 using StoreManager.Services.Groups.Contracts.Dto;
 using StoreManager.Services.Groups.Exceptions;
+using StoreManager.Services.Products.Contracts;
 
 namespace StoreManager.Services.Groups
 {
@@ -10,11 +11,16 @@ namespace StoreManager.Services.Groups
     {
         private readonly GroupRepository _repository;
         private readonly UnitOfWork _unitOfWork;
+        private readonly ProductRepository _productRepository;
 
-        public GroupAppService(GroupRepository repository, UnitOfWork unitOfWork)
+        public GroupAppService
+            (GroupRepository repository,
+            UnitOfWork unitOfWork,
+            ProductRepository productRepository)
         {
             _repository = repository;
             _unitOfWork = unitOfWork;
+            _productRepository = productRepository;
         }
 
         public void Define(AddGroupsDto dto)
@@ -32,6 +38,23 @@ namespace StoreManager.Services.Groups
             _repository.Add(group);
             _unitOfWork.Complete();
 
+        }
+
+        public void Delete(DeleteGroupsDto dto)
+        {
+            var group = _repository.FindById(dto.Id);
+            var groupHaveProducts = _productRepository.IsAsseignedToGroup(dto.Id);
+            if (groupHaveProducts)
+            {
+                throw new GroupHasProductsException();
+            }
+            else if (group == null)
+            {
+                throw new GroupNotFoundException();
+            }
+
+            _repository.Delete(group);
+            _unitOfWork.Complete();
         }
     }
 }
