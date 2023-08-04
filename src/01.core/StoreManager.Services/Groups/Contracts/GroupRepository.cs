@@ -9,7 +9,9 @@ namespace StoreManager.Services.Groups.Contracts
         void Delete(Group group);
         Group FindById(int id);
         bool IdExist(int id);
-        
-        
+        bool ProductNameExist(string name);
+
+
+
     }
 }

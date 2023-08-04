@@ -5,6 +5,7 @@ using StoreManager.Persistence.EF.Products;
 using StoreManager.Services.Contracts;
 using StoreManager.Services.Groups;
 using StoreManager.Services.Groups.Contracts;
+using StoreManager.Services.Products;
 using StoreManager.Services.Products.Contracts;
 
 namespace StoreManager.RestApi
@@ -24,6 +25,7 @@ namespace StoreManager.RestApi
             builder.Services.AddScoped<GroupService , GroupAppService>();
             builder.Services.AddScoped<GroupRepository , EFGroupRepository>();
             builder.Services.AddScoped<ProductRepository , EFProductRepository>();
+            builder.Services.AddScoped<ProductService, ProductAppService>();
 
             var app = builder.Build();
 

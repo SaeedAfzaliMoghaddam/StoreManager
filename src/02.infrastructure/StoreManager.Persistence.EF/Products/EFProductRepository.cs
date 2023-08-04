@@ -17,6 +17,11 @@ namespace StoreManager.Persistence.EF.Products
             _products = context.Set<Product>();
         }
 
+        public void Add(Product product)
+        {
+            _products.Add(product);
+        }
+
         public bool IsAsseignedToGroup(int id)
         {
             return _products.Any(_=>_.GroupId == id);

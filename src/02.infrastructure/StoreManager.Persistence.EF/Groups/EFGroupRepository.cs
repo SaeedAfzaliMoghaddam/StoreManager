@@ -41,5 +41,10 @@ namespace StoreManager.Persistence.EF.Groups
         {
             return _groups.Any(_=>_.Name == name);
         }
+
+        public bool ProductNameExist(string name)
+        {
+            return _groups.Any(_ => _.Products.Select(_ => _.Title == name).Any());
+        }
     }
 }

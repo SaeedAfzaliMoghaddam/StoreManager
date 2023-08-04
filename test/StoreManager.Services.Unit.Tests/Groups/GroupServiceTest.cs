@@ -7,6 +7,7 @@ using StoreManager.TestTools.Factories.Groups;
 using StoreManager.TestTools.Factories.Products;
 using StoreManager.TestTools.Infrastructure.DataBaseConfig;
 using StoreManager.TestTools.Infrastructure.DataBaseConfig.Unit;
+using System.Text.RegularExpressions;
 using Xunit;
 
 namespace StoreManager.Services.Unit.Tests.Groups
@@ -27,7 +28,7 @@ namespace StoreManager.Services.Unit.Tests.Groups
 
             _sut.Define(dto);
 
-            var expected = ReadContext.Set<Group>().Single();
+            var expected = ReadContext.Set<Entities.Group>().Single();
             expected.Name.Should().Be(dto.Name);
 
         }
@@ -53,7 +54,7 @@ namespace StoreManager.Services.Unit.Tests.Groups
 
             _sut.Delete(dto);
 
-            var exepted = ReadContext.Set<Group>();
+            var exepted = ReadContext.Set<Entities.Group>();
             exepted.Should().HaveCount(0);
         }
 
@@ -73,7 +74,8 @@ namespace StoreManager.Services.Unit.Tests.Groups
         {
             var group = GroupFactory.Generate("dummyGroup");
             DbContext.Save(group);
-            var product = ProductFactory.Generate("dummyProduct", group.Id);
+            var product = ProductFactory.Generate
+                ("dummy", group.Id, 10, ProductStatus.OutOfStocks, 0);
             DbContext.Save(product);
             var dto = DeleteGroupsDtoFactory.Generate(group.Id);
 

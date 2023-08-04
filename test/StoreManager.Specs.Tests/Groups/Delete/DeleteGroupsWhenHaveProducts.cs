@@ -10,6 +10,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Xunit;
 using static StoreManager.Specs.Tests.BDDHelper;
@@ -36,7 +37,8 @@ namespace StoreManager.Specs.Tests.Groups.Delete
             var group = GroupFactory.Generate("بهداشتی");
             DbContext.Save(group);
 
-            var product = ProductFactory.Generate("شامپو", group.Id);
+            var product = ProductFactory.Generate
+                ("شیر", group.Id, 10, ProductStatus.OutOfStocks, 0);
             DbContext.Save(product);
 
             _dto = DeleteGroupsDtoFactory.Generate(group.Id);

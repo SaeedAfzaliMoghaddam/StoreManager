@@ -1,4 +1,5 @@
 ﻿using FluentMigrator;
+using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,7 +22,12 @@ namespace StoreManager.Migrations
                 .Table("Products")
                 .WithColumn("Id").AsInt32().PrimaryKey().Identity()
                 .WithColumn("Title").AsString(50).NotNullable()
-                .WithColumn("GroupId").AsInt32().ForeignKey("FK_Products_Groups", "Groups", "Id");
+                .WithColumn("MinimumInventory").AsInt32().NotNullable()
+                .WithColumn("Inventory").AsInt32().NotNullable()
+                .WithColumn("Status").AsInt32().NotNullable()
+                .WithColumn("GroupId").AsInt32()
+                .ForeignKey("FK_Products_Groups", "Groups", "Id");
         }
+
     }
 }

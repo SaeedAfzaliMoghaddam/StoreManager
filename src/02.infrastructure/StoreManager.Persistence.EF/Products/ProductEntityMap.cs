@@ -14,20 +14,23 @@ namespace StoreManager.Persistence.EF.Products
         public void Configure(EntityTypeBuilder<Product> entity)
         {
             entity.ToTable("Products");
-            entity.HasKey(_=>_.Id);
+            entity.HasKey(_ => _.Id);
             entity
                 .Property(_ => _.Id)
                 .ValueGeneratedOnAdd();
             entity
                 .Property(_ => _.Title)
-                .HasMaxLength(50)
                 .IsRequired();
             entity
-                .Property(_=>_.GroupId)
-                .HasMaxLength(50)
+                .Property(_ => _.GroupId)
                 .IsRequired();
-
-                
+            entity
+                .Property(_ => _.MinimumInventory)
+                .IsRequired();
+            entity
+                .Property(_ => _.Status)
+                .IsRequired();
+            
         }
     }
 }
