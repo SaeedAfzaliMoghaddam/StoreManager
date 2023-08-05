@@ -9,6 +9,7 @@
         public int? Inventory { get; set; }
         public ProductStatus Status { get; set; }
         public Group Group { get; set; }
+        public HashSet<ProductEntrance> ProductEntrances { get; set;}
 
     }
 }

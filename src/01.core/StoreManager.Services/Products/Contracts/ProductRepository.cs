@@ -11,5 +11,7 @@ namespace StoreManager.Services.Products.Contracts
     {
         bool IsAsseignedToGroup(int id);
         void Add(Product product);
+        Product FindById(int id);
+        void Update(Product product);
     }
 }

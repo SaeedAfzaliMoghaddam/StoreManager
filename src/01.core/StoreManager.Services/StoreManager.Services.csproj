@@ -10,4 +10,8 @@
     <ProjectReference Include="..\StoreManager.Entities\StoreManager.Entities.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="ProductEntrances\Exceptions\" />
+  </ItemGroup>
+
 </Project>

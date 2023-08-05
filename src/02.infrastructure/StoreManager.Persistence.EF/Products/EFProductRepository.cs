@@ -22,9 +22,19 @@ namespace StoreManager.Persistence.EF.Products
             _products.Add(product);
         }
 
+        public Product FindById(int id)
+        {
+            return _products.Where(_ => _.Id == id).FirstOrDefault();
+        }
+
         public bool IsAsseignedToGroup(int id)
         {
             return _products.Any(_=>_.GroupId == id);
+        }
+
+        public void Update(Product product)
+        {
+            _products.Update(product);
         }
     }
 }

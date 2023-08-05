@@ -1,10 +1,13 @@
 using Microsoft.EntityFrameworkCore;
 using StoreManager.Persistence.EF;
 using StoreManager.Persistence.EF.Groups;
+using StoreManager.Persistence.EF.ProductEntrances;
 using StoreManager.Persistence.EF.Products;
 using StoreManager.Services.Contracts;
 using StoreManager.Services.Groups;
 using StoreManager.Services.Groups.Contracts;
+using StoreManager.Services.ProductEntrances;
+using StoreManager.Services.ProductEntrances.Contracts;
 using StoreManager.Services.Products;
 using StoreManager.Services.Products.Contracts;
 
@@ -26,6 +29,8 @@ namespace StoreManager.RestApi
             builder.Services.AddScoped<GroupRepository , EFGroupRepository>();
             builder.Services.AddScoped<ProductRepository , EFProductRepository>();
             builder.Services.AddScoped<ProductService, ProductAppService>();
+            builder.Services.AddScoped<ProductEntranceService , ProductEntranceAppService>();
+            builder.Services.AddScoped<ProductEntranceRepository , EFProductEntranceRepository>();
 
             var app = builder.Build();
 
