@@ -14,6 +14,8 @@ using StoreManager.Services.ProductSaleBills;
 using StoreManager.Services.ProductSaleBills.Contracts.Dto;
 using StoreManager.Persistence.EF.ProductSaleBills;
 using StoreManager.Persistence.EF;
+using StoreManager.Persistence.EF.AccountingDocuments;
+using StoreManager.Persistence.EF.Products;
 
 namespace StoreManager.Specs.Tests.ProductSales.Add
 {
@@ -26,7 +28,10 @@ namespace StoreManager.Specs.Tests.ProductSales.Add
         {
             var repository = new EFProductSaleBillRepository(SetupContext);
             var unitOfWork = new EFUnitOfWork(SetupContext);
-            _sut = new ProductSaleBillAppService(repository, unitOfWork);
+            var acountingDoc = new EFAccountingDocumentRepository(SetupContext);
+            var productRepo = new EFProductRepository(SetupContext);
+            _sut = new ProductSaleBillAppService
+                (repository, unitOfWork, acountingDoc, productRepo);
         }
         [Given("گروهی با نام لوازم یدکی " +
             "در فهرست گروه ها وجود دارد")]
@@ -49,7 +54,8 @@ namespace StoreManager.Specs.Tests.ProductSales.Add
                 CustomerName = "مجید رضوی",
                 UnitPrice = 1000,
                 Count = 5,
-                ProductEntranceId = product.ProductEntrances.Select(_=>_.Id).First(),
+                ProductId = product.Id,
+                
             };
 
         }
@@ -87,7 +93,7 @@ namespace StoreManager.Specs.Tests.ProductSales.Add
             expected2.BillNumber.Should().Be("123a");
             expected2.CustomerName.Should().Be("مجید رضوی");
             expected2.DateTime.Should().Be(DateTime.Now.ToString());
-            expected2.ProductEntranceId.Should().Be(_dto.ProductEntranceId);
+            expected2.ProductId.Should().Be(_dto.ProductId);
 
             var expected3 = ReadContext.Set<AccountingDocument>().Single();
             expected3.BillNumber.Should().Be(expected2.BillNumber);

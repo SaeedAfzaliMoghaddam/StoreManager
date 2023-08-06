@@ -5,6 +5,7 @@
         public Product()
         {
             ProductEntrances = new HashSet<ProductEntrance>();
+            ProductSaleBills = new HashSet<ProductSaleBill>();
         }
 
         public int Id { get; set; }
@@ -14,7 +15,8 @@
         public int? Inventory { get; set; }
         public ProductStatus Status { get; set; }
         public Group Group { get; set; }
-        public HashSet<ProductEntrance> ProductEntrances { get; set;}
+        public HashSet<ProductEntrance> ProductEntrances { get; set; }
+        public HashSet<ProductSaleBill> ProductSaleBills { get; set; }
 
     }
 }

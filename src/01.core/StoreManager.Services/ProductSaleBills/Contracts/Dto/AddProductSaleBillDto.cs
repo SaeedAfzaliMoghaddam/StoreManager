@@ -19,7 +19,7 @@ namespace StoreManager.Services.ProductSaleBills.Contracts.Dto
         public int Count { get; set; }
 
         [Required]
-        public int ProductEntranceId { get; set; }
+        public int ProductId { get; set; }
 
         [Required]
         public string BillNumber { get; set; }

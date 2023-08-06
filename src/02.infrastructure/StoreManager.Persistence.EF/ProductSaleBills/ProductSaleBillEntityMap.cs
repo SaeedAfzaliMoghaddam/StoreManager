@@ -22,18 +22,13 @@ namespace StoreManager.Persistence.EF.ProductSaleBills
             entity.Property(_ => _.Count).IsRequired();
             entity.Property(_ => _.BillNumber).IsRequired();
             entity.Property(_ => _.DateTime).IsRequired();
-            entity.Property(_ => _.DateTime).IsRequired();
-            entity.Property(_ => _.ProductEntranceId).IsRequired();
-            entity.HasOne(_ => _.ProductEntrance)
+            entity.Property(_ => _.ProductId).IsRequired();
+            entity.HasOne(_ => _.Product)
                   .WithMany(_ => _.ProductSaleBills)
-                  .HasForeignKey(_ => _.ProductEntranceId);
+                  .HasForeignKey(_ => _.ProductId);
             entity.HasOne(_ => _.AccountingDocument)
                   .WithOne(_ => _.ProductSaleBill)
                   .HasForeignKey<AccountingDocument>(_ => _.ProductSaleBillId);
-                
-
-
-
 
         }
     }

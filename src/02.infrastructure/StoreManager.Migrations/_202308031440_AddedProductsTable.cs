@@ -25,8 +25,9 @@ namespace StoreManager.Migrations
                 .WithColumn("MinimumInventory").AsInt32().NotNullable()
                 .WithColumn("Inventory").AsInt32().NotNullable()
                 .WithColumn("Status").AsInt32().NotNullable()
-                .WithColumn("GroupId").AsInt32()
+                .WithColumn("GroupId").AsInt32().NotNullable()
                 .ForeignKey("FK_Products_Groups", "Groups", "Id");
+                
         }
 
     }

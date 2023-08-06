@@ -26,8 +26,8 @@ namespace StoreManager.Migrations
                 .WithColumn("Count").AsInt32().NotNullable()
                 .WithColumn("BillNumber").AsGuid().NotNullable()
                 .WithColumn("DateTime").AsString().NotNullable()
-                .WithColumn("ProductEntranceId").AsInt32().NotNullable()
-                .ForeignKey("FK_ProductSaleBills_ProductEntrances", "ProductEntrances", "Id");
+                .WithColumn("ProductId").AsInt32().NotNullable()
+                .ForeignKey("FK_ProductSaleBills_Products", "Products", "Id");
 
         }
     }

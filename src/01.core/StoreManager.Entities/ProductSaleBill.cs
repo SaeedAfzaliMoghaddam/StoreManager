@@ -9,8 +9,8 @@
         public int Count { get; set; }
         public string BillNumber { get; set; }
         public string DateTime { get; set; }
-        public int ProductEntranceId { get; set; }
-        public ProductEntrance ProductEntrance { get; set; }
+        public int ProductId { get; set; }
+        public Product Product { get; set; }
         public AccountingDocument AccountingDocument { get; set; }
 
 

@@ -1,6 +1,8 @@
 ﻿using FluentAssertions;
 using StoreManager.Entities;
 using StoreManager.Persistence.EF;
+using StoreManager.Persistence.EF.AccountingDocuments;
+using StoreManager.Persistence.EF.Products;
 using StoreManager.Persistence.EF.ProductSaleBills;
 using StoreManager.Services.ProductSaleBills;
 using StoreManager.Services.ProductSaleBills.Contracts;
@@ -25,7 +27,10 @@ namespace StoreManager.Services.Unit.Tests.ProductSaleBills
         {
             var repository = new EFProductSaleBillRepository(SetupContext);
             var unitOfWork = new EFUnitOfWork(SetupContext);
-            _sut = new ProductSaleBillAppService(repository, unitOfWork);
+            var acountingDoc = new EFAccountingDocumentRepository(SetupContext);
+            var productRepo = new EFProductRepository(SetupContext);
+            _sut = new ProductSaleBillAppService
+                (repository, unitOfWork,acountingDoc,productRepo);
         }
         [Fact]
         public void Add_add_a_productSaleBill_properly()
@@ -35,22 +40,13 @@ namespace StoreManager.Services.Unit.Tests.ProductSaleBills
             var product = ProductFactory.Generate
                 ("لنت ترمز", group.Id, 5, ProductStatus.InStock, 20);
             DbContext.Save(product);
-            var productEntrance = new ProductEntrance
-            {
-                ProductId = product.Id,
-                DateTime = DateTime.Now.ToString(),
-                Count = 0,
-                FactorNumber = "123A",
-                ProductCompanyName = "dummy",
-            };
-            DbContext.Save(productEntrance);
             var dto = new AddProductSaleBillDto
             {
                 ProductName = "لنت ترمز",
                 CustomerName = "مجید رضوی",
                 UnitPrice = 1000,
                 Count = 5,
-                ProductEntranceId = productEntrance.Id,
+                ProductId = product.Id,
                 BillNumber = "123a"
                 
 
@@ -59,10 +55,12 @@ namespace StoreManager.Services.Unit.Tests.ProductSaleBills
             _sut.Define(dto);
 
             var expected = ReadContext.Set<Product>().Single();
-            expected.Title.Should().Be(product.Title);
-            expected.Inventory.Should().Be(20);
+            expected.Title.Should().Be(dto.ProductName);
+            expected.Inventory.Should().Be(product.Inventory - dto.Count);
             expected.MinimumInventory.Should().Be(product.MinimumInventory);
             expected.GroupId.Should().Be(expected.GroupId);
+            expected.Status.Should().Be(ProductStatus.InStock);
+            
 
             var expected2 = ReadContext.Set<ProductSaleBill>().Single();
             expected2.ProductName.Should().Be(dto.ProductName);
@@ -71,7 +69,7 @@ namespace StoreManager.Services.Unit.Tests.ProductSaleBills
             expected2.CustomerName.Should().Be(dto.CustomerName);
             expected2.BillNumber.Should().Be(dto.BillNumber);
             expected2.DateTime.Should().Be(DateTime.Now.ToString());
-            expected2.ProductEntranceId.Should().Be(dto.ProductEntranceId);
+            expected2.ProductId.Should().Be(dto.ProductId);
 
             var expected3 = ReadContext.Set<AccountingDocument>().Single();
             expected3.BillNumber.Should().Be(expected2.BillNumber);

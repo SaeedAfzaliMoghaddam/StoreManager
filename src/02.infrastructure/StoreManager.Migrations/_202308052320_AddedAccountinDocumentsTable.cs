@@ -12,7 +12,7 @@ namespace StoreManager.Migrations
     {
         public override void Down()
         {
-            
+            Delete.Table("AccountingDocuments");
         }
 
         public override void Up()

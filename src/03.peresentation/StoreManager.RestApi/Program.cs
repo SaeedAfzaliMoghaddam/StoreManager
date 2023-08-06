@@ -23,7 +23,7 @@ namespace StoreManager.RestApi
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
             builder.Services.AddDbContext<EFDataContext>(_ =>_.UseSqlServer
-            ("Server=.;Database=StoreManager;Trusted_Connection=True;"));
+            ("Server=.;Database=StoreManagerFinal;Trusted_Connection=True;"));
             builder.Services.AddScoped<UnitOfWork, EFUnitOfWork>();
             builder.Services.AddScoped<GroupService , GroupAppService>();
             builder.Services.AddScoped<GroupRepository , EFGroupRepository>();
